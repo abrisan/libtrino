@@ -11,7 +11,6 @@
 #include <unordered_map>
 #include <iostream>
 #include "cpr/cpr.h"
-#include "Status.h"
 #include "TrinoJsonWrapper.h"
 
 namespace abrisan {
@@ -22,7 +21,6 @@ namespace abrisan {
             int port;
             std::string user;
             std::optional<std::unordered_map<std::string, std::string>> http_headers;
-            std::string next_uri;
         private:
             [[nodiscard]] std::string make_statement_url() const;
         public:
@@ -32,8 +30,6 @@ namespace abrisan {
             };
             cpr::Response post(std::string const &sql, std::optional<std::unordered_map<std::string, std::string>> const &additional_headers = {});
             static cpr::Response get(std::string const &url);
-            Status process(cpr::Response const &response);
-            [[nodiscard]] std::string get_next_uri() const { return this->next_uri; }
         };
 
         std::string Request::make_statement_url() const {
@@ -63,20 +59,6 @@ namespace abrisan {
 
         cpr::Response Request::get(std::string const &url) {
             return cpr::Get(cpr::Url(url));
-        }
-
-        Status Request::process(cpr::Response const &response) {
-            auto data_as_json = json::parse(response.text);
-
-            if (data_as_json["nextUri"].is_null()) {
-                this->next_uri = "";
-            }
-            else {
-                this->next_uri = data_as_json["nextUri"];
-            }
-
-
-            return {data_as_json["id"], data_as_json["infoUri"], this->next_uri, data_as_json["data"], data_as_json["columns"]};
         }
     }
 }

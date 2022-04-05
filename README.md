@@ -9,4 +9,25 @@ This project is built using CMake and it is has the following open-soruce depend
 - [cpr](https://github.com/libcpr/cpr) An awesome C++ requests library, modelled on the Python requests package
 - [nlohmann::json](https://github.com/nlohmann/json) An awesome, easy to use JSON library for C++
 
+## Code Sample
+
+This is how you can run a simple query:
+
+```c++
+#include <iostream>
+
+#include "abrisan/trino/Connection.h"
+
+using namespace abrisan;
+
+int main() {
+    trino::Connection connection("localhost", 8080, trino::Scheme::HTTP, {}, "abrisan1");
+    trino::Result result;
+    connection.execute("SHOW CATALOGS", result);
+    std::cout << result["Catalog"] << std::endl;
+    return 0;
+}
+
+```
+
 Stay tuned for more updates!
