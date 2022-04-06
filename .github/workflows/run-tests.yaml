@@ -1,0 +1,12 @@
+name: Run Tests
+on: [push]
+jobs:
+  Run-Tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build the Code and Run Tests
+        run: docker-compose run test
+      - name: Bring Down Environment
+        run: docker-compose down

@@ -1,7 +1,10 @@
-cmake_minimum_required(VERSION 3.21)
-project(trino_lib)
+cmake_minimum_required(VERSION 3.18)
+project(libtrino)
+set(CMAKE_CXX_STANDARD 20)
 
-set(CMAKE_CXX_STANDARD 23)
+enable_testing()
+
 add_subdirectory(abrisan/trino)
-add_executable(trino_lib main.cpp)
-target_link_libraries(trino_lib PRIVATE libtrino)
+add_subdirectory(tests)
+add_executable(sample_main main.cpp)
+target_link_libraries(sample_main PRIVATE libtrino)

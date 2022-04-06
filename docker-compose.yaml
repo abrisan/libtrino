@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  trino:
+    image: trinodb/trino
+
+  test:
+    build: .
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+      - /workspace/cmake-build-debug
+    command:
+      sh -c "./scripts/build.sh ."
+    depends_on:
+      - trino

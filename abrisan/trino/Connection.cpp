@@ -47,7 +47,7 @@ void parseRows(json const &rows, Result &result) {
         Row transformed_row;
         size_t idx = 0;
         for (auto const &value : row) {
-            auto as_string = to_string(value);
+            std::string as_string = value;
             auto trino_type = result.typeMappings()[result.columns().second[idx]];
             transformed_row.push_back(convert_to_cpp_type(as_string, trino_type));
             ++idx;

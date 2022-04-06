@@ -6,6 +6,7 @@
 #define TRINO_LIB_TRINOTYPES_H
 
 #include <string>
+#include <variant>
 
 namespace abrisan::trino {
 
