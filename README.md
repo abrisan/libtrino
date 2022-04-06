@@ -30,4 +30,13 @@ int main() {
 
 ```
 
+## Running Tests
+
+You can run the tests using docker, by running `docker-compose run test`
+
+
+## Development Environment
+
+You should be able to open this project using [CLion](https://www.jetbrains.com/clion/) and develop with it.
+
 Stay tuned for more updates!
