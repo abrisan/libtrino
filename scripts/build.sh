@@ -7,9 +7,9 @@ then
   mkdir $BASE_DIR/build
 fi
 
-cd $BASE_DIR/build || exit
+cd $BASE_DIR/build || exit 1
 cmake ..
-make
+make || exit 1
 
 echo "Waiting for trino"
 

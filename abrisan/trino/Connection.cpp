@@ -29,15 +29,6 @@
 
 using namespace abrisan::trino;
 
-void Connection::execute(std::string const &sql, Result &out, HttpHeaders const &additional_headers) {
-    Request request(this->host, this->port, this->user, this->http_headers);
-    cpr::Response response = request.post(sql, additional_headers);
-    auto next_uri = Connection::processPartialResponse(response, out);
-    while (next_uri.has_value()) {
-        response = request.get(next_uri.value());
-        next_uri = Connection::processPartialResponse(response, out);
-    }
-}
 
 void parseColumns(json const &columns, Result &result) {
     if (columns.is_null() || !result.columns().first.empty()) {

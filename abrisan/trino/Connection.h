@@ -30,6 +30,9 @@
 #include <utility>
 #include <cpr/cpr.h>
 #include <optional>
+#include "CompatibleHttpClient.h"
+#include "DefaultHttpClient.h"
+#include "Request.h"
 
 namespace abrisan {
     namespace trino {
@@ -53,7 +56,17 @@ namespace abrisan {
             Connection(std::string host, int port, Scheme scheme, HttpHeaders http_headers, std::string user) :
                     host(std::move(host)), port(port), scheme(scheme), http_headers(std::move(http_headers)), user(std::move(user)) {};
 
-            void execute(std::string const &sql, Result &result, HttpHeaders const &additionalHeaders = {});
+            template<CompatibleHttpClient HttpClient = DefaultHttpClient>
+            void execute(std::string const &sql, Result &result, HttpHeaders const &additionalHeaders = {}) {
+                static_assert(CompatibleHttpClient<HttpClient>);
+                Request<HttpClient> request(this->host, this->port, this->user, this->http_headers);
+                cpr::Response response = request.post(sql, additionalHeaders);
+                auto next_uri = Connection::processPartialResponse(response, result);
+                while (next_uri.has_value()) {
+                    response = request.get(next_uri.value());
+                    next_uri = Connection::processPartialResponse(response, result);
+                }
+            }
         };
     }
 }
