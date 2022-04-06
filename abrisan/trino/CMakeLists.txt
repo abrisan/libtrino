@@ -11,6 +11,6 @@ FetchContent_MakeAvailable(cpr)
 FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.10.5/json.tar.xz)
 FetchContent_MakeAvailable(json)
 
-add_library(libtrino Connection.h Request.h TrinoJsonWrapper.h Result.cpp Result.h TrinoTypes.h Connection.cpp TrinoTypes.cpp CompatibleHttpClient.h DefaultHttpClient.cpp DefaultHttpClient.h)
+add_library(libtrino Connection.h Request.h TrinoJsonWrapper.h Result.cpp Result.h TrinoTypes.h TrinoTypes.cpp CompatibleHttpClient.h DefaultHttpClient.cpp DefaultHttpClient.h)
 target_link_libraries(libtrino PUBLIC cpr nlohmann_json::nlohmann_json)
 set_target_properties(libtrino PROPERTIES LINKER_LANGUAGE CXX)

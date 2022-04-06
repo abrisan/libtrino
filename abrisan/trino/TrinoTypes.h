@@ -10,7 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
+ * The above copyright notice and this permission notice shall be included in
+ all
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -21,7 +22,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 
 #ifndef TRINO_LIB_TRINOTYPES_H
 #define TRINO_LIB_TRINOTYPES_H
@@ -48,13 +48,13 @@ namespace abrisan::trino {
 
     SupportedTrinoTypes parseTypeSignature(std::string const &raw_type);
 
-    TrinoValue convert_to_cpp_type(std::string const &value, SupportedTrinoTypes type);
+    TrinoValue convert_to_cpp_type(std::string const &value,
+                                   SupportedTrinoTypes type);
 
     template<SupportedTrinoTypes type>
     struct TrinoTypesCppTraits {
     public:
-        template<typename CType>
-        using CorrespondingType = CType;
+        template<typename CType> using CorrespondingType = CType;
 
         template<typename CType>
         static CorrespondingType<CType> parse(std::string const &value);
@@ -65,9 +65,7 @@ namespace abrisan::trino {
     public:
         using CorrespondingType = bool;
 
-        static bool parse(std::string const &value) {
-            return value == "true";
-        }
+        static bool parse(std::string const &value) { return value == "true"; }
     };
 
     template<>
@@ -75,9 +73,7 @@ namespace abrisan::trino {
     public:
         using CorrespondingType = long long;
 
-        static long long parse(std::string const &value) {
-            return std::stoll(value);
-        }
+        static long long parse(std::string const &value) { return std::stoll(value); }
     };
 
     template<>
@@ -85,9 +81,7 @@ namespace abrisan::trino {
     public:
         using CorrespondingType = long long;
 
-        static long long parse(std::string const &value) {
-            return std::stoll(value);
-        }
+        static long long parse(std::string const &value) { return std::stoll(value); }
     };
 
     template<>
@@ -95,9 +89,7 @@ namespace abrisan::trino {
     public:
         using CorrespondingType = long long;
 
-        static long long parse(std::string const &value) {
-            return std::stoll(value);
-        }
+        static long long parse(std::string const &value) { return std::stoll(value); }
     };
 
     template<>
@@ -105,9 +97,7 @@ namespace abrisan::trino {
     public:
         using CorrespondingType = long long;
 
-        static long long parse(std::string const &value) {
-            return std::stoll(value);
-        }
+        static long long parse(std::string const &value) { return std::stoll(value); }
     };
 
     template<>
@@ -115,9 +105,7 @@ namespace abrisan::trino {
     public:
         using CorrespondingType = float;
 
-        static float parse(std::string const &value) {
-            return std::stof(value);
-        }
+        static float parse(std::string const &value) { return std::stof(value); }
     };
 
     template<>
@@ -125,9 +113,7 @@ namespace abrisan::trino {
     public:
         using CorrespondingType = double;
 
-        static double parse(std::string const &value) {
-            return std::stod(value);
-        }
+        static double parse(std::string const &value) { return std::stod(value); }
     };
 
     template<>
@@ -135,9 +121,7 @@ namespace abrisan::trino {
     public:
         using CorrespondingType = std::string;
 
-        static std::string parse(std::string const &value) {
-            return value;
-        }
+        static std::string parse(std::string const &value) { return value; }
     };
 
     template<>
@@ -145,9 +129,7 @@ namespace abrisan::trino {
     public:
         using CorrespondingType = std::string;
 
-        static std::string parse(std::string const &value) {
-            return value;
-        }
+        static std::string parse(std::string const &value) { return value; }
     };
 
     template<>
@@ -155,11 +137,8 @@ namespace abrisan::trino {
     public:
         using CorrespondingType = std::string;
 
-        static std::string parse(std::string const &value) {
-            return value;
-        }
+        static std::string parse(std::string const &value) { return value; }
     };
-}
+} // namespace abrisan::trino
 
-
-#endif //TRINO_LIB_TRINOTYPES_H
+#endif // TRINO_LIB_TRINOTYPES_H

@@ -10,7 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
+ * The above copyright notice and this permission notice shall be included in
+ all
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -22,24 +23,19 @@
  * SOFTWARE.
  */
 
-
-
 #include "DefaultHttpClient.h"
 
 using namespace abrisan;
 
-cpr::Response trino::DefaultHttpClient::post(const std::string &url, const std::string &sql,
-                                             const std::unordered_map<std::string, std::string> &headers,
-                                             const std::string &user) {
+cpr::Response trino::DefaultHttpClient::post(
+        const std::string &url, const std::string &sql,
+        const std::unordered_map<std::string, std::string> &headers,
+        const std::string &user) {
     cpr::Header _headers;
     _headers.insert(headers.begin(), headers.end());
 
-    return cpr::Post(
-            cpr::Url{url},
-            cpr::Body{sql},
-            _headers,
-            cpr::Authentication{user, ""}
-            );
+    return cpr::Post(cpr::Url{url}, cpr::Body{sql}, _headers,
+                     cpr::Authentication{user, ""});
 }
 
 cpr::Response trino::DefaultHttpClient::get(const std::string &url) {

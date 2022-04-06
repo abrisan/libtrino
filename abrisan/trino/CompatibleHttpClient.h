@@ -10,7 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
+ * The above copyright notice and this permission notice shall be included in
+ all
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -22,7 +23,6 @@
  * SOFTWARE.
  */
 
-
 #ifndef LIBTRINO_COMPATIBLEHTTPCLIENT_H
 #define LIBTRINO_COMPATIBLEHTTPCLIENT_H
 
@@ -33,11 +33,8 @@ namespace abrisan::trino {
 
     template<typename T>
     concept CompatibleHttpClient = requires(
-            std::string const &url,
-            std::string const &sql,
-            std::string const &user,
-            std::unordered_map<std::string, std::string> const &headers
-            ) {
+            std::string const &url, std::string const &sql, std::string const &user,
+            std::unordered_map<std::string, std::string> const &headers) {
 
         typename T::Response;
 
@@ -45,6 +42,6 @@ namespace abrisan::trino {
         { T::get(url) } -> std::same_as<typename T::Response>;
     };
 
-}
+} // namespace abrisan::trino
 
-#endif //LIBTRINO_COMPATIBLEHTTPCLIENT_H
+#endif // LIBTRINO_COMPATIBLEHTTPCLIENT_H

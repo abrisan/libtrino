@@ -10,7 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
+ * The above copyright notice and this permission notice shall be included in
+ all
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -22,25 +23,25 @@
  * SOFTWARE.
  */
 
-
 #ifndef LIBTRINO_DEFAULTHTTPCLIENT_H
 #define LIBTRINO_DEFAULTHTTPCLIENT_H
 
 #include <cpr/cpr.h>
-#include <unordered_map>
 #include <string>
-
+#include <unordered_map>
 
 namespace abrisan::trino {
     class DefaultHttpClient {
     public:
         using Response = cpr::Response;
 
-        static cpr::Response post(std::string const &url, std::string const &sql, std::unordered_map<std::string, std::string> const &headers, std::string const &user);
+        static cpr::Response
+        post(std::string const &url, std::string const &sql,
+             std::unordered_map<std::string, std::string> const &headers,
+             std::string const &user);
+
         static cpr::Response get(std::string const &url);
     };
-}
+} // namespace abrisan::trino
 
-
-
-#endif //LIBTRINO_DEFAULTHTTPCLIENT_H
+#endif // LIBTRINO_DEFAULTHTTPCLIENT_H
