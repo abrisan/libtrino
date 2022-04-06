@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.21)
-project(trino_lib)
+cmake_minimum_required(VERSION 3.18)
+project(libtrino)
 
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 20)
 include(FetchContent)
 FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git
         GIT_TAG 6ea2dec23c3df14ac3b27b7d2d6bbff0cb7ba1b0)
