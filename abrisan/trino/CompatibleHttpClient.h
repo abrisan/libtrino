@@ -23,15 +23,25 @@
  * SOFTWARE.
  */
 
-#ifndef TRINO_LIB_TRINOJSONWRAPPER_H
-#define TRINO_LIB_TRINOJSONWRAPPER_H
+#ifndef LIBTRINO_COMPATIBLEHTTPCLIENT_H
+#define LIBTRINO_COMPATIBLEHTTPCLIENT_H
 
-#include "nlohmann/json.hpp"
+#include <concepts>
+#include <unordered_map>
 
-namespace abrisan {
-    namespace trino {
-        using json = nlohmann::json;
-    }
-} // namespace abrisan
+namespace abrisan::trino {
 
-#endif // TRINO_LIB_TRINOJSONWRAPPER_H
+    template<typename T>
+    concept CompatibleHttpClient = requires(
+            std::string const &url, std::string const &sql, std::string const &user,
+            std::unordered_map<std::string, std::string> const &headers) {
+
+        typename T::Response;
+
+        { T::post(url, sql, headers, user) } -> std::same_as<typename T::Response>;
+        { T::get(url) } -> std::same_as<typename T::Response>;
+    };
+
+} // namespace abrisan::trino
+
+#endif // LIBTRINO_COMPATIBLEHTTPCLIENT_H

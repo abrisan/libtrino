@@ -23,15 +23,25 @@
  * SOFTWARE.
  */
 
-#ifndef TRINO_LIB_TRINOJSONWRAPPER_H
-#define TRINO_LIB_TRINOJSONWRAPPER_H
+#ifndef LIBTRINO_DEFAULTHTTPCLIENT_H
+#define LIBTRINO_DEFAULTHTTPCLIENT_H
 
-#include "nlohmann/json.hpp"
+#include <cpr/cpr.h>
+#include <string>
+#include <unordered_map>
 
-namespace abrisan {
-    namespace trino {
-        using json = nlohmann::json;
-    }
-} // namespace abrisan
+namespace abrisan::trino {
+    class DefaultHttpClient {
+    public:
+        using Response = cpr::Response;
 
-#endif // TRINO_LIB_TRINOJSONWRAPPER_H
+        static cpr::Response
+        post(std::string const &url, std::string const &sql,
+             std::unordered_map<std::string, std::string> const &headers,
+             std::string const &user);
+
+        static cpr::Response get(std::string const &url);
+    };
+} // namespace abrisan::trino
+
+#endif // LIBTRINO_DEFAULTHTTPCLIENT_H
